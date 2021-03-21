@@ -1,4 +1,4 @@
-package com.test.controller; // 0
+package com.test.controller;
 
 import com.test.dto.LectureDto;
 import com.test.dto.TestDto;
@@ -7,7 +7,7 @@ import com.test.service.test.TestService;
 import com.test.util.firebase.FirebaseMessagingSnippets;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller; // 1
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.ArrayList;
 
-@Controller // 1
-public class TestController { // 1
+@Controller
+public class LectureController {
 
     @Autowired
     ServletContext servletContext;
@@ -40,16 +40,11 @@ public class TestController { // 1
         return "index";
     }
 
-    @GetMapping("/admin") // 어드민 홈으로 유도
-    public String admin(Model model){
-        try{
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "admin/admin";
-    }
 
+
+
+    ///////////////////////////////////////////////////////어드민 페이지////////////////////////////////////////////
     @GetMapping("/admin/home") // 어드민 홈
     public String adminHome(Model model){
         try{
@@ -60,7 +55,7 @@ public class TestController { // 1
         return "admin/home";
     }
 
-    @GetMapping("/admin/data-table.do") // 어드민 강의 데이터 보여주기
+    @GetMapping("/admin/lecture-data-table.do") // 어드민 강의 데이터 보여주기
     public String dataTable(Model model){
         try{
             ArrayList<LectureDto> lectureList = lectureService.getItemList();
@@ -68,17 +63,17 @@ public class TestController { // 1
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/data-table";
+        return "admin/lecture-data-table";
     }
 
-    @GetMapping("/admin/form.do") // 어드민 강의 데이터 입력 폼
+    @GetMapping("/admin/lecture-form.do") // 어드민 강의 데이터 입력 폼
     public String form(Model model){
         try{
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/form";
+        return "admin/lecture-form";
     }
 
     @GetMapping("/admin/login.do") // 어드민 로그인 페이지 (미구현)
@@ -98,15 +93,16 @@ public class TestController { // 1
                              @Param("lecImg") MultipartFile lecImg){
         try{
             // 한칸이라도 비어있다면 다 입력하라는 알림창이 뜨게 만들기
-            // 동일한 사진이름이 있다면 ?
+            // 동일한 사진이름이 있다면 ? 덮어씌워질텐데
             System.out.println("hi from post");
 
             String filename = lecImg.getOriginalFilename();
-            String lecImgPath = "/files/" + filename; // db에 저장될 파일 주소
-            String dirPath = servletContext.getRealPath("/") + "files\\"; // 서버에 저장될 파일 주소
+            String lecImgPath = "/files/lecture/" + filename; // db에 저장될 파일 주소
+            String dirPath = servletContext.getRealPath("/") + "files\\lecture\\"; // 서버에 저장될 파일 주소
 
             if (!lecImg.isEmpty()){
                 lecImg.transferTo(new File(dirPath + filename));
+                System.out.println("file upload success");
             } else {
                 lecImgPath = null;
             }
@@ -114,29 +110,29 @@ public class TestController { // 1
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/data-table.do";
+        return "redirect:/admin/lecture-data-table.do";
     }
 
-    @GetMapping(value = "/admin/delete.do") // 어드민 강의 삭제
+    @GetMapping(value = "/admin/lecture-delete.do") // 어드민 강의 삭제
     public String delete(@RequestParam(value = "lecNo") int lecNo){
         try{
-            LectureDto dblecture = lectureService.selectItem(lecNo);
-            lectureService.deleteItem(lecNo);
-            String dirPath = servletContext.getRealPath("/");
-            File targetFile = new File(dirPath + dblecture.getLecImg());
-            String delName = targetFile.getName();
-            if (targetFile.delete()) {
+            LectureDto dblecture = lectureService.selectItem(lecNo); // 강의키로 강의 정보 가져오기
+            String dirPath = servletContext.getRealPath("/"); // 경로 저장
+            File targetFile = new File(dirPath + dblecture.getLecImg()); // 삭제할 파일선언
+            String delName = targetFile.getName(); // 삭제할 파일 이름 변수에 저장
+            if (targetFile.delete()) { // 파일 삭제
                 System.out.println("Deleted the file: " + delName);
             } else {
                 System.out.println("Failed to delete the file.");
             }
+            lectureService.deleteItem(lecNo); //성공시 DB에서도 삭제
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/data-table.do";
+        return "redirect:/admin/lecture-data-table.do";
     }
 
-    @GetMapping("/admin/edit.do") // 어드민 강의 수정 폼
+    @GetMapping("/admin/lecture-edit.do") // 어드민 강의 수정 폼
     public String editForm(@RequestParam(value = "lecNo") int lecNo, Model model){
         try{
             System.out.println("lecNo: " + lecNo);
@@ -145,7 +141,7 @@ public class TestController { // 1
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/edit";
+        return "admin/lecture-edit";
     }
 
     @RequestMapping(value = "/admin/editLecture.do", method = {RequestMethod.POST, RequestMethod.GET}) // 어드민 강의 수정
@@ -169,11 +165,11 @@ public class TestController { // 1
                 }
 
                 String filename = lecImg.getOriginalFilename();
-                String lecImgPath = "/files/" + filename;
+                String lecImgPath = "/files/lecture/" + filename;
                 System.out.println("db data path : "+lecImgPath);
 
                 if (!lecImg.isEmpty()) {
-                    String dirPath = servletContext.getRealPath("/") + "files\\";
+                    String dirPath = servletContext.getRealPath("/") + "files\\lecture\\";
                     lecImg.transferTo(new File(dirPath + filename));
                 } else {
                     lecImgPath = null;
@@ -187,10 +183,10 @@ public class TestController { // 1
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/data-table.do";
+        return "redirect:/admin/lecture-data-table.do";
     }
 
-
+///////////////////////////////////////////////////////어드민 페이지////////////////////////////////////////////
 
 
 
