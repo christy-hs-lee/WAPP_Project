@@ -61,15 +61,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="/admin/banner-form.do">
                         <i class="link-icon" data-feather="inbox"></i>
-                        <span class="link-title">? 관리</span>
+                        <span class="link-title">배너 관리</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="/admin/banner-data-table.do">
                         <i class="link-icon" data-feather="layout"></i>
-                        <span class="link-title">? 관리</span>
+                        <span class="link-title">배너 열람</span>
                     </a>
                 </li>
                 <li class="nav-item">

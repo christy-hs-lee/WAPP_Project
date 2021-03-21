@@ -9,7 +9,8 @@
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
     <typeAliases>
-        <typeAlias alias="TestDto" type="com.test.dto.TestDto"/>
+        <typeAlias alias="BannerDto" type="com.test.dto.BannerDto"/>
         <typeAlias alias="LectureDto" type="com.test.dto.LectureDto"/>
+        <typeAlias alias="TestDto" type="com.test.dto.TestDto"/>
     </typeAliases>
 </configuration>

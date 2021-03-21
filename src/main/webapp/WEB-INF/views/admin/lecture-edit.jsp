@@ -61,15 +61,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="/admin/banner-form.do">
                         <i class="link-icon" data-feather="inbox"></i>
-                        <span class="link-title">? 관리</span>
+                        <span class="link-title">배너 관리</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="/admin/banner-data-table.do">
                         <i class="link-icon" data-feather="layout"></i>
-                        <span class="link-title">? 관리</span>
+                        <span class="link-title">배너 열람</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -201,7 +201,7 @@
 											</span>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" type="submit">수정</button>
+                                <button class="btn btn-primary" type="submit" disabled="disabled">수정</button>
                                 <button class="btn btn-primary" type="button" onclick="location.href='/admin/lecture-data-table.do'">취소</button>
                             </form>
                         </div>
@@ -226,8 +226,7 @@
     function btn_status() {
         if (document.getElementById("exampleInputText1").value !== '' &&
             document.getElementById("exampleInputText2").value !== '' &&
-            document.getElementById("exampleInputNumber1").value !== '' &&
-            document.getElementById("exampleImage1").value !== '') {
+            document.getElementById("exampleInputNumber1").value !== '') {
             document.getElementById("sub_btn").disabled = false;
         } else {
             document.getElementById("sub_btn").disabled = true;

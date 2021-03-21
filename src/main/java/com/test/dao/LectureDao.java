@@ -17,9 +17,8 @@ public class LectureDao {
         try{
             System.out.println("lec.do Dao do");
             LectureMapper lectureMapper = sqlSession.getMapper(LectureMapper.class);
-            ArrayList<LectureDto> lectureInfoList = lectureMapper.getItemList();
             System.out.println("lec.do Dao end");
-            return lectureInfoList;
+            return lectureMapper.getItemList();
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -47,8 +46,7 @@ public class LectureDao {
         try{
             LectureMapper lectureMapper = sqlSession.getMapper(LectureMapper.class);
             System.out.println("select: " + lecNo);
-            LectureDto lecture = lectureMapper.selectItem(lecNo);
-            return lecture;
+            return lectureMapper.selectItem(lecNo);
         }catch (Exception e){
             e.printStackTrace();
             return null;

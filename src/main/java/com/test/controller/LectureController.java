@@ -158,19 +158,19 @@ public class LectureController {
 
             try {// 이미지가 업로드되었다면 삭제, 새로 저장후 링크 db에 저장, 같은 이름의 이미지가 서버에 저장되어있는지 확인 필요
                 System.out.println("editItemWithImg");
+                String filename = lecImg.getOriginalFilename();
+                String lecImgPath = "/files/lecture/" + filename;
+                System.out.println("db data path : "+lecImgPath);
+
                 if (targetFile.delete()) {
                     System.out.println("Deleted the file: " + delName);
                 } else {
                     System.out.println("Failed to delete the file.");
                 }
 
-                String filename = lecImg.getOriginalFilename();
-                String lecImgPath = "/files/lecture/" + filename;
-                System.out.println("db data path : "+lecImgPath);
-
                 if (!lecImg.isEmpty()) {
                     String dirPath = servletContext.getRealPath("/") + "files\\lecture\\";
-                    lecImg.transferTo(new File(dirPath + filename));
+                    lecImg.transferTo(new File(dirPath + filename)); // 서버에 새 사진 저장
                 } else {
                     lecImgPath = null;
                 }

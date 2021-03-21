@@ -168,35 +168,35 @@
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>카테고리</th>
                                         <th>이름</th>
-                                        <th>가격</th>
+                                        <th>내용</th>
+                                        <th>클릭수</th>
                                         <th>등록 날짜</th>
                                         <th>이미지</th>
                                         <th>Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:set var="lectureList" value="${lectureList}"/>
-                                    <c:forEach var="i" begin = "1" end = "${lectureList.size()}">
+                                    <c:set var="bannerList" value="${bannerList}"/>
+                                    <c:forEach var="i" begin = "1" end = "${bannerList.size()}">
                                         <tr>
                                             <td>${i}</td>
-                                            <td>${lectureList[i-1].lecCategory}</td>
-                                            <td>${lectureList[i-1].lecName}</td>
-                                            <td style="text-align: right"><fmt:formatNumber value="${lectureList[i-1].lecPrice}" type="currency" currencySymbol="" />원</td>
-                                            <td><fmt:formatDate value="${lectureList[i-1].lecRegDate}" pattern="yyyy-MM-dd" /></td>
+                                            <td>${bannerList[i-1].banTitle}</td>
+                                            <td>${bannerList[i-1].banContent}</td>
+                                            <td>${bannerList[i-1].banCount}</td>
+                                            <td><fmt:formatDate value="${bannerList[i-1].banRegDate}" pattern="yyyy-MM-dd" /></td>
                                             <c:choose>
-                                            <c:when test="${empty lectureList[i-1].lecImg}">
+                                            <c:when test="${empty bannerList[i-1].banImg}">
                                                 <td>이미지 없음</td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><button class="btn btn-primary" onclick="window.open('${lectureList[i-1].lecImg}')">이미지 보기</button></td>
+                                                <td><button class="btn btn-primary" onclick="window.open('${bannerList[i-1].banImg}')">이미지 보기</button></td>
                                             </c:otherwise>
                                             </c:choose>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="btn btn-primary" onclick="location.href='/admin/lecture-edit.do?lecNo=${lectureList[i-1].lecNo}'">수정</button>
-                                                <button class="btn btn-secondary" onclick="if(confirm('정말 삭제하시겠습니까?')){location.href='/admin/lecture-delete.do?lecNo=${lectureList[i-1].lecNo}';} else {return false;}">삭제</button>
+                                                <button class="btn btn-primary" onclick="location.href='/admin/banner-edit.do?banNo=${bannerList[i-1].banNo}'">수정</button>
+                                                <button class="btn btn-secondary" onclick="if(confirm('정말 삭제하시겠습니까?')){location.href='/admin/banner-delete.do?banNo=${bannerList[i-1].banNo}';} else {return false;}">삭제</button>
                                                 </div>
                                             </td>
                                         </tr>

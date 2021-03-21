@@ -14,10 +14,7 @@ public class LectureServiceImp implements LectureService {
 
     @Override
     public ArrayList<LectureDto> getItemList() {
-        System.out.println("lecture.do Service do");
-        ArrayList<LectureDto> lectureInfoList = lectureDao.getItemList();
-        System.out.println("lecture.do Service end");
-        return lectureInfoList;
+        return lectureDao.getItemList();
     }
 
     @Override
