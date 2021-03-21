@@ -32,11 +32,10 @@ public class LectureDao {
             e.printStackTrace();
         }
     }
-    public void addItem(String lecCategory, String lecName, int lecPrice, String lecImg){
+    public void addItem(LectureDto lectureDto){
         try{
             LectureMapper lectureMapper = sqlSession.getMapper(LectureMapper.class);
-            System.out.println("dao: " + lecCategory +" "+ lecName +" "+ lecPrice);
-            lectureMapper.addItem(lecCategory, lecName, lecPrice, lecImg);
+            lectureMapper.addItem(lectureDto);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -53,24 +52,13 @@ public class LectureDao {
         }
     }
 
-    public void editItem(int lecNo, String lecCategory, String lecName, int lecPrice, String lecImg){
+    public void editItem(LectureDto lectureDto){
         try{
             LectureMapper lectureMapper = sqlSession.getMapper(LectureMapper.class);
-            System.out.println("edit: " + lecCategory +" "+ lecName +" "+ lecPrice);
-            lectureMapper.editItem(lecNo, lecCategory, lecName, lecPrice, lecImg);
+            lectureMapper.editItem(lectureDto);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-
-    public void editItemWithoutImage(int lecNo, String lecCategory, String lecName, int lecPrice){
-        try{
-            LectureMapper lectureMapper = sqlSession.getMapper(LectureMapper.class);
-            System.out.println("edit: " + lecCategory +" "+ lecName +" "+ lecPrice);
-            lectureMapper.editItemWithoutImage(lecNo, lecCategory, lecName, lecPrice);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 }

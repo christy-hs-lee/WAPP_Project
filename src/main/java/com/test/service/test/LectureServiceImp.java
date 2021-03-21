@@ -23,9 +23,8 @@ public class LectureServiceImp implements LectureService {
     }
 
     @Override
-    public void addItem(String lecCategory, String lecName, int lecPrice, String lecImg) {
-        System.out.println("service: " + lecCategory +" "+ lecName +" "+ lecPrice);
-        lectureDao.addItem(lecCategory, lecName, lecPrice, lecImg);
+    public void addItem(LectureDto lectureDto) {
+        lectureDao.addItem(lectureDto);
     }
 
     @Override
@@ -35,14 +34,7 @@ public class LectureServiceImp implements LectureService {
     }
 
     @Override
-    public void editItem(int lecNo, String lecCategory, String lecName, int lecPrice, String lecImg) {
-        System.out.println("service: " + lecCategory + " " + lecName + " " + lecPrice);
-        lectureDao.editItem(lecNo, lecCategory, lecName, lecPrice, lecImg);
-    }
-
-    @Override
-    public void editItemWithoutImage(int lecNo, String lecCategory, String lecName, int lecPrice) {
-        System.out.println("service: " + lecCategory + " " + lecName + " " + lecPrice);
-        lectureDao.editItemWithoutImage(lecNo, lecCategory, lecName, lecPrice);
+    public void editItem(LectureDto lectureDto) {
+        lectureDao.editItem(lectureDto);
     }
 }

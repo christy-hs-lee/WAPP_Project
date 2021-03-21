@@ -3,7 +3,6 @@ package com.test.controller;
 import com.test.dto.BannerDto;
 import com.test.service.test.BannerService;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,8 +30,6 @@ public class BannerController {
 
     @PostMapping("/admin/banner-form.do")
     public String bannerUpload(BannerDto bannerDto, MultipartFile banImage, HttpServletRequest request){
-
-        System.out.println( banImage.getOriginalFilename() );
 
         bannerDto.setBanImg("/files/banner/" + banImage.getOriginalFilename()); // 파일이름을 dto파일이름으로 set ( 경로가 바뀌면 데이터베이스에있는 경로도 다 바꿔야하는데?)
         System.out.println( bannerDto.toString() );

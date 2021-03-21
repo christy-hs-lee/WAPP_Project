@@ -18,4 +18,8 @@ public class LectureDto {
     public String getLecImg() {
         return lecImg;
     }
+
+    public void setLecImg(String lecImg) {
+        this.lecImg = lecImg;
+    }
 }

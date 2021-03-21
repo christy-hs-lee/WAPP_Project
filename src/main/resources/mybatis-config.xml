@@ -11,6 +11,5 @@
     <typeAliases>
         <typeAlias alias="BannerDto" type="com.test.dto.BannerDto"/>
         <typeAlias alias="LectureDto" type="com.test.dto.LectureDto"/>
-        <typeAlias alias="TestDto" type="com.test.dto.TestDto"/>
     </typeAliases>
 </configuration>

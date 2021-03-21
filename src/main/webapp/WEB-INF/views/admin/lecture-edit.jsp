@@ -192,7 +192,7 @@
 
                                 <div class="form-group">
                                     <label>File upload</label>
-                                    <input type="file" oninput="btn_status()" name="lecImg" id="exampleImage1" class="file-upload-default">
+                                    <input type="file" oninput="btn_status()" name="lecImage" id="exampleImage1" class="file-upload-default">
                                     <div class="input-group col-xs-12">
                                         <c:set var="lecimg" value="${lecture.lecImg.replaceAll('/files/lecture/','')}"/>
                                         <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image"  value="${lecimg}">
@@ -201,7 +201,7 @@
 											</span>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary" type="submit" disabled="disabled">수정</button>
+                                <button class="btn btn-primary" type="submit" disabled="disabled" id="sub_btn">수정</button>
                                 <button class="btn btn-primary" type="button" onclick="location.href='/admin/lecture-data-table.do'">취소</button>
                             </form>
                         </div>

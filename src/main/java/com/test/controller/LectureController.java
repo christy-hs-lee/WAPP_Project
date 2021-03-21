@@ -1,9 +1,7 @@
 package com.test.controller;
 
 import com.test.dto.LectureDto;
-import com.test.dto.TestDto;
 import com.test.service.test.LectureService;
-import com.test.service.test.TestService;
 import com.test.util.firebase.FirebaseMessagingSnippets;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
@@ -23,8 +22,6 @@ public class LectureController {
     @Autowired
     ServletContext servletContext;
 
-    @Autowired
-    TestService testService;
     @Autowired
     LectureService lectureService;
     @Autowired
@@ -87,26 +84,12 @@ public class LectureController {
     }
 
     @PostMapping(value = "/admin/addLecture.do") //어드민 강의 추가
-    public String addLecture(@Param("lecCategory") String lecCategory,
-                             @Param("lecName") String lecName,
-                             @Param("lecPrice") int lecPrice,
-                             @Param("lecImg") MultipartFile lecImg){
+    public String addLecture(LectureDto lectureDto, MultipartFile lecImage,  HttpServletRequest request){
         try{
-            // 한칸이라도 비어있다면 다 입력하라는 알림창이 뜨게 만들기
             // 동일한 사진이름이 있다면 ? 덮어씌워질텐데
-            System.out.println("hi from post");
-
-            String filename = lecImg.getOriginalFilename();
-            String lecImgPath = "/files/lecture/" + filename; // db에 저장될 파일 주소
-            String dirPath = servletContext.getRealPath("/") + "files\\lecture\\"; // 서버에 저장될 파일 주소
-
-            if (!lecImg.isEmpty()){
-                lecImg.transferTo(new File(dirPath + filename));
-                System.out.println("file upload success");
-            } else {
-                lecImgPath = null;
-            }
-            lectureService.addItem(lecCategory, lecName, lecPrice, lecImgPath);
+            lectureDto.setLecImg("/files/lecture/" + lecImage.getOriginalFilename()); //db에 저장될 이름세팅
+            saveFile(lecImage, request); // 서버에 저장
+            lectureService.addItem(lectureDto); // DB에 저장
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -116,9 +99,9 @@ public class LectureController {
     @GetMapping(value = "/admin/lecture-delete.do") // 어드민 강의 삭제
     public String delete(@RequestParam(value = "lecNo") int lecNo){
         try{
-            LectureDto dblecture = lectureService.selectItem(lecNo); // 강의키로 강의 정보 가져오기
+            LectureDto dbLecture = lectureService.selectItem(lecNo); // 강의키로 강의 정보 가져오기
             String dirPath = servletContext.getRealPath("/"); // 경로 저장
-            File targetFile = new File(dirPath + dblecture.getLecImg()); // 삭제할 파일선언
+            File targetFile = new File(dirPath + dbLecture.getLecImg()); // 삭제할 파일선언
             String delName = targetFile.getName(); // 삭제할 파일 이름 변수에 저장
             if (targetFile.delete()) { // 파일 삭제
                 System.out.println("Deleted the file: " + delName);
@@ -145,41 +128,30 @@ public class LectureController {
     }
 
     @RequestMapping(value = "/admin/editLecture.do", method = {RequestMethod.POST, RequestMethod.GET}) // 어드민 강의 수정
-    public String editLecture(@Param("lecNo") int lecNo,
-                              @Param("lecCategory") String lecCategory,
-                             @Param("lecName") String lecName,
-                             @Param("lecPrice") int lecPrice,
-                              @Param("lecImg") MultipartFile lecImg){
+    public String editLecture(@Param("lecNo") int lecNo, LectureDto lectureDto, MultipartFile lecImage, HttpServletRequest request){
         try{
             System.out.println("hi from edit");
-            LectureDto dblecture = lectureService.selectItem(lecNo);
-            File targetFile = new File(servletContext.getRealPath("/") + dblecture.getLecImg());
-            String delName = targetFile.getName();
+            LectureDto dbLecture = lectureService.selectItem(lecNo); // DB에있던 강의 가져오기
 
-            try {// 이미지가 업로드되었다면 삭제, 새로 저장후 링크 db에 저장, 같은 이름의 이미지가 서버에 저장되어있는지 확인 필요
+            String filename = lecImage.getOriginalFilename();
+            if (filename.isEmpty()) { // 이미지이름이 빈칸 == 이미지새로 업로드 안함
+                System.out.println("editItemWithoutImg");
+                lectureDto.setLecImg(dbLecture.getLecImg()); // db에 있던 강의이미지를 그대로 넣어주기
+            } else { // 이미지 이름이 있으면 기존이미지 삭제 후 새이미지를 저장
                 System.out.println("editItemWithImg");
-                String filename = lecImg.getOriginalFilename();
-                String lecImgPath = "/files/lecture/" + filename;
-                System.out.println("db data path : "+lecImgPath);
 
+                File targetFile = new File(servletContext.getRealPath("/") + dbLecture.getLecImg()); // 서버에있는 삭제할 강의파일 지정
+                String delName = targetFile.getName(); // 삭제될 배너파일이름
                 if (targetFile.delete()) {
                     System.out.println("Deleted the file: " + delName);
                 } else {
                     System.out.println("Failed to delete the file.");
                 }
+                saveFile(lecImage, request); // 서버에 사진 저장
 
-                if (!lecImg.isEmpty()) {
-                    String dirPath = servletContext.getRealPath("/") + "files\\lecture\\";
-                    lecImg.transferTo(new File(dirPath + filename)); // 서버에 새 사진 저장
-                } else {
-                    lecImgPath = null;
-                }
-                lectureService.editItem(lecNo, lecCategory, lecName, lecPrice, lecImgPath);
-            } catch (NullPointerException e) {// 이미지를 새로 업로드하지 않았으면 데이터베이스에있는 이미지를 그대로 저장
-                System.out.println("editItemWithoutImg");
-                lectureService.editItem(lecNo, lecCategory, lecName, lecPrice, dblecture.getLecImg());
+                lectureDto.setLecImg("/files/lecture/" + lecImage.getOriginalFilename()); // 새로운 이미지이름으로 dto객체의 이미지이름 저장
             }
-
+            lectureService.editItem(lectureDto); // db에 저장
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -198,66 +170,21 @@ public class LectureController {
 
 
 
+    private String saveFile(MultipartFile file, HttpServletRequest request) {
+        String root_path = request.getSession().getServletContext().getRealPath("/");
+        String attach_path = "files/lecture/";
+        String filename = file.getOriginalFilename();
 
-
-
-
-    @GetMapping("/test.do")
-    public String test(Model model){
-        try{
-            System.out.println("test.do Controller");
-            ArrayList<TestDto> itemList = testService.getItemList();
-            model.addAttribute("itemList", itemList);
-        }catch (Exception e){
+        System.out.println("saveName: "+ root_path + attach_path + filename);
+        File saveFile = new File(root_path + attach_path + filename);
+        try {
+            file.transferTo(saveFile);
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        return "test";
-    }
-
-    @RequestMapping(value = "/get.do", method = RequestMethod.GET)
-    public String get(@RequestParam(value = "data") String data){
-        try{
-            System.out.println("controller: " + data);
-            testService.addItem(data);
-        }catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
 
-        return "redirect:/test.do";
+        return filename;
     }
 
-    @RequestMapping(value = "/post.do", method = RequestMethod.POST)
-    public String post(@RequestParam(value = "data") String data){
-        try{
-            System.out.println("post방식 data: " + data);
-            testService.addItem(data);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "redirect:/test.do";
-    }
-
-    @RequestMapping(value = "/delete.do", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "number") String number){
-        try{
-            System.out.println("number: " + number);
-            testService.deleteItem(number);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "redirect:/test.do";
-    }
-
-    @GetMapping("/fcm.do")
-    public String fcm(@RequestParam(value = "fcm") String fcm, @RequestParam(value = "title") String title, @RequestParam(value = "content") String content, HttpServletRequest req){
-        try{
-            System.out.println("fcm: " + fcm);
-            System.out.println("title: " + title);
-            System.out.println("content: " + content);
-            firebaseMessagingSnippets.test_send_FCM(fcm, title, content, req);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "redirect:/";
-    }
 }
