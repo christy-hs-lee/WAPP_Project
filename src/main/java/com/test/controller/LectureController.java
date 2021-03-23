@@ -27,21 +27,7 @@ public class LectureController {
     @Autowired
     FirebaseMessagingSnippets firebaseMessagingSnippets;
 
-    @GetMapping("/") // 홈
-    public String main(Model model){
-        try{
 
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "index";
-    }
-
-
-
-
-
-    ///////////////////////////////////////////////////////어드민 페이지////////////////////////////////////////////
     @GetMapping("/admin/home") // 어드민 홈
     public String adminHome(Model model){
         try{
@@ -158,12 +144,6 @@ public class LectureController {
         return "redirect:/admin/lecture-data-table.do";
     }
 
-///////////////////////////////////////////////////////어드민 페이지////////////////////////////////////////////
-
-
-
-
-
 
 
 
@@ -183,8 +163,6 @@ public class LectureController {
             e.printStackTrace();
             return null;
         }
-
         return filename;
     }
-
 }
