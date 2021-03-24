@@ -38,7 +38,7 @@ public class LectureController {
         return "admin/home";
     }
 
-    @GetMapping("/admin/lecture-data-table.do") // 어드민 강의 데이터 보여주기
+    @GetMapping("/admin/lecture/data-table.do") // 어드민 강의 데이터 보여주기
     public String dataTable(Model model){
         try{
             ArrayList<LectureDto> lectureList = lectureService.getItemList();
@@ -46,17 +46,17 @@ public class LectureController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/lecture-data-table";
+        return "admin/lecture/data-table";
     }
 
-    @GetMapping("/admin/lecture-form.do") // 어드민 강의 데이터 입력 폼
+    @GetMapping("/admin/lecture/form.do") // 어드민 강의 데이터 입력 폼
     public String form(Model model){
         try{
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/lecture-form";
+        return "admin/lecture/form";
     }
 
     @GetMapping("/admin/login.do") // 어드민 로그인 페이지 (미구현)
@@ -79,10 +79,10 @@ public class LectureController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/lecture-data-table.do";
+        return "redirect:/admin/lecture/data-table.do";
     }
 
-    @GetMapping(value = "/admin/lecture-delete.do") // 어드민 강의 삭제
+    @GetMapping(value = "/admin/lecture/delete.do") // 어드민 강의 삭제
     public String delete(@RequestParam(value = "lecNo") int lecNo){
         try{
             LectureDto dbLecture = lectureService.selectItem(lecNo); // 강의키로 강의 정보 가져오기
@@ -98,10 +98,10 @@ public class LectureController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/lecture-data-table.do";
+        return "redirect:/admin/lecture/data-table.do";
     }
 
-    @GetMapping("/admin/lecture-edit.do") // 어드민 강의 수정 폼
+    @GetMapping("/admin/lecture/edit.do") // 어드민 강의 수정 폼
     public String editForm(@RequestParam(value = "lecNo") int lecNo, Model model){
         try{
             System.out.println("lecNo: " + lecNo);
@@ -110,7 +110,7 @@ public class LectureController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/lecture-edit";
+        return "admin/lecture/edit";
     }
 
     @RequestMapping(value = "/admin/editLecture.do", method = {RequestMethod.POST, RequestMethod.GET}) // 어드민 강의 수정
@@ -141,7 +141,7 @@ public class LectureController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/lecture-data-table.do";
+        return "redirect:/admin/lecture/data-table.do";
     }
 
 

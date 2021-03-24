@@ -24,10 +24,10 @@ public class BannerDao {
         }
     }
 
-    public void insertBanner(BannerDto bannerDto){
+    public void addItem(BannerDto bannerDto){
         try{
             BannerMapper bannerMapper = sqlSession.getMapper(BannerMapper.class);
-            bannerMapper.insertBanner(bannerDto);
+            bannerMapper.addItem(bannerDto);
             System.out.println("dao: " + bannerDto);
         }catch (Exception e){
             e.printStackTrace();

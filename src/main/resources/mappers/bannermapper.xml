@@ -13,7 +13,7 @@
     <select id="selectItem" resultType="BannerDto">
         select * from banner where banNo=${banNo}
     </select>
-    <insert id="insertBanner" >
+    <insert id="addItem" >
         INSERT INTO banner(banImg, banCount, banRegDate, banTitle, banContent)
                 VALUES(#{bannerDto.banImg}, #{bannerDto.banCount}, now(), #{bannerDto.banTitle}, #{bannerDto.banContent})
     </insert>
