@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public interface BannerMapper {
     ArrayList<BannerDto> getItemList();
-    void addItem(@Param("bannerDto") BannerDto bannerDto);
+    void insertBanner(@Param("bannerDto") BannerDto bannerDto);
     void deleteItem(@Param("banNo") int banNo);
     void editItem(@Param("bannerDto") BannerDto bannerDto);
     BannerDto selectItem(@Param("banNo") int banNo);

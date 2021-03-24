@@ -19,9 +19,9 @@ public class BannerServiceImp implements BannerService {
     }
 
     @Override
-    public void addItem(BannerDto bannerDto) {
+    public void insertBanner(BannerDto bannerDto) {
         System.out.println("insertBanner Service do");
-        bannerDao.addItem(bannerDto);
+        bannerDao.insertBanner(bannerDto);
         System.out.println("insertBanner Service end");
     }
     @Override

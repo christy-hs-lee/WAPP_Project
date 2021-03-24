@@ -24,39 +24,27 @@
             <li class="nav-item nav-category">MANAGE</li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin/lecture/form.do">
+                <a class="nav-link" href="/admin/lecture-form.do">
                     <i class="link-icon" data-feather="feather"></i>
-                    <span class="link-title">강의 추가</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/lecture/data-table.do">
-                    <i class="link-icon" data-feather="anchor"></i>
                     <span class="link-title">강의 관리</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/banner/form.do">
-                    <i class="link-icon" data-feather="inbox"></i>
-                    <span class="link-title">배너 추가</span>
+                <a class="nav-link" href="/admin/lecture-data-table.do">
+                    <i class="link-icon" data-feather="anchor"></i>
+                    <span class="link-title">강의 열람</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/banner/data-table.do">
-                    <i class="link-icon" data-feather="layout"></i>
+                <a class="nav-link" href="/admin/banner-form.do">
+                    <i class="link-icon" data-feather="inbox"></i>
                     <span class="link-title">배너 관리</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/popup/form.do">
-                    <i class="link-icon" data-feather="inbox"></i>
-                    <span class="link-title">팝업 추가</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/popup/data-table.do">
+                <a class="nav-link" href="/admin/banner-data-table.do">
                     <i class="link-icon" data-feather="layout"></i>
-                    <span class="link-title">팝업 관리</span>
+                    <span class="link-title">배너 열람</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -90,6 +78,16 @@
                     Dark
                 </label>
             </div>
+        </div>
+        <div class="theme-wrapper">
+            <h6 class="text-muted mb-2">Light Theme:</h6>
+            <a class="theme-item active" href="demo_1/dashboard-one.html">
+                <img src="assets/images/screenshots/light.jpg" alt="light theme">
+            </a>
+            <h6 class="text-muted mb-2">Dark Theme:</h6>
+            <a class="theme-item" href="demo_2/dashboard-one.html">
+                <img src="assets/images/screenshots/dark.jpg" alt="light theme">
+            </a>
         </div>
     </div>
 </nav>

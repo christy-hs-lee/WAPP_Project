@@ -4,4 +4,3 @@ target
 *.iml
 web
 src/test
-src/main/webapp/resources/assets

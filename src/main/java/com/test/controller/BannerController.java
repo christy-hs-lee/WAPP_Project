@@ -22,25 +22,25 @@ public class BannerController {
     @Autowired
     BannerService bannerService;
 
-    @GetMapping("/admin/banner/form.do") //.do없애도 되나?
+    @GetMapping("/admin/banner-form.do") //.do없애도 되나?
     public String bannerHome(Model model){
         System.out.println("HI from bannerCtrl");
-        return "admin/banner/form";
+        return "admin/banner-form";
     }
 
-    @PostMapping("/admin/banner/form.do")
+    @PostMapping("/admin/banner-form.do")
     public String bannerUpload(BannerDto bannerDto, MultipartFile banImage, HttpServletRequest request){
 
         bannerDto.setBanImg("/files/banner/" + banImage.getOriginalFilename()); // 파일이름을 dto파일이름으로 set ( 경로가 바뀌면 데이터베이스에있는 경로도 다 바꿔야하는데?)
         System.out.println( bannerDto.toString() );
 
-        bannerService.addItem(bannerDto);//DB에 저장함
+        bannerService.insertBanner(bannerDto);//DB에 저장함
         saveFile(banImage, request);// 파일을 서버에 업로드함
 
-        return "redirect:/admin/banner/data-table.do";
+        return "redirect:/admin/banner-data-table.do";
     }
 
-    @GetMapping("/admin/banner/data-table.do")
+    @GetMapping("/admin/banner-data-table.do")
     public String bannerDataTable(Model model){
         System.out.println("HI from dt");
         try{
@@ -50,10 +50,10 @@ public class BannerController {
             e.printStackTrace();
         }
 
-        return "admin/banner/data-table";
+        return "admin/banner-data-table";
     }
 
-    @GetMapping(value = "/admin/banner/delete.do") // 어드민 강의 삭제
+    @GetMapping(value = "/admin/banner-delete.do") // 어드민 강의 삭제
     public String delete(@RequestParam(value = "banNo") int banNo){
         try{
             BannerDto dbBanner = bannerService.selectItem(banNo); // 강의키로 강의 정보 가져오기
@@ -70,10 +70,10 @@ public class BannerController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/banner/data-table.do";
+        return "redirect:/admin/banner-data-table.do";
     }
 
-    @GetMapping("/admin/banner/edit.do") // 어드민 강의 수정 폼
+    @GetMapping("/admin/banner-edit.do") // 어드민 강의 수정 폼
     public String editForm(@RequestParam(value = "banNo") int banNo, Model model){
         try{
             System.out.println("banNo: " + banNo);
@@ -82,7 +82,7 @@ public class BannerController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "admin/banner/edit";
+        return "admin/banner-edit";
     }
 
     @RequestMapping(value = "/admin/editBanner.do", method = {RequestMethod.POST, RequestMethod.GET}) // 어드민 강의 수정
@@ -114,7 +114,7 @@ public class BannerController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/admin/banner/data-table.do";
+        return "redirect:/admin/banner-data-table.do";
     }
 
     private String saveFile(MultipartFile file, HttpServletRequest request) {
