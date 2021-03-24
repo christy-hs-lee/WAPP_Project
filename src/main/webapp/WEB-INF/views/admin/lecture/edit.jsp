@@ -46,31 +46,35 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">Banner</h6>
-                            <c:set var="banner" value="${banner}"/>
-                            <form action="/admin/editBanner.do?banNo=${banner.banNo}" method="post" enctype="multipart/form-data">
+                            <h6 class="card-title">Lecture</h6>
+                            <c:set var="lecture" value="${lecture}"/>
+                            <form action="/admin/editLecture.do?lecNo=${lecture.lecNo}" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="exampleInputText1">Title</label>
-                                    <input type="text" oninput="btn_status()" class="form-control" id="exampleInputText1" placeholder="Lecture Category" name="banTitle" value="${banner.banTitle}">
+                                    <label for="exampleInputText1">CATEGORY</label>
+                                    <input type="text" oninput="btn_status()" class="form-control" id="exampleInputText1" placeholder="Lecture Category" name="lecCategory" value="${lecture.lecCategory}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputText2">Content</label>
-                                    <input type="text" oninput="btn_status()" class="form-control" id="exampleInputText2" placeholder="Lecture Name" name="banContent" value="${banner.banContent}">
+                                    <label for="exampleInputText2">NAME</label>
+                                    <input type="text" oninput="btn_status()" class="form-control" id="exampleInputText2" placeholder="Lecture Name" name="lecName" value="${lecture.lecName}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputNumber1">PRICE</label>
+                                    <input type="number" oninput="btn_status()" class="form-control" id="exampleInputNumber1" placeholder="Price" name="lecPrice" value="${lecture.lecPrice}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>File upload</label>
-                                    <input type="file" oninput="btn_status()" name="banImage" id="exampleImage1" class="file-upload-default">
+                                    <input type="file" oninput="btn_status()" name="lecImage" id="exampleImage1" class="file-upload-default">
                                     <div class="input-group col-xs-12">
-                                        <c:set var="banImg" value="${banner.banImg.replaceAll('/files/banner/','')}"/>
-                                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image"  value="${banImg}">
+                                        <c:set var="lecimg" value="${lecture.lecImg.replaceAll('/files/lecture/','')}"/>
+                                        <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image"  value="${lecimg}">
                                         <span class="input-group-append">
 												<button class="file-upload-browse btn btn-primary" type="button">Upload</button>
 											</span>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary" type="submit" disabled="disabled" id="sub_btn">수정</button>
-                                <button class="btn btn-primary" type="button" onclick="location.href='/admin/banner-data-table.do'">취소</button>
+                                <button class="btn btn-primary" type="button" onclick="location.href='/admin/lecture/data-table.do'">취소</button>
                             </form>
                         </div>
                     </div>
@@ -90,7 +94,8 @@
 
     function btn_status() {
         if (document.getElementById("exampleInputText1").value !== '' &&
-            document.getElementById("exampleInputText2").value !== '') {
+            document.getElementById("exampleInputText2").value !== '' &&
+            document.getElementById("exampleInputNumber1").value !== '') {
             document.getElementById("sub_btn").disabled = false;
         } else {
             document.getElementById("sub_btn").disabled = true;

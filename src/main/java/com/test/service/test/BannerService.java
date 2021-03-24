@@ -5,7 +5,7 @@ import com.test.dto.BannerDto;
 import java.util.ArrayList;
 
 public interface BannerService {
-    void insertBanner(BannerDto bannerDto);
+    void addItem(BannerDto bannerDto);
     ArrayList<BannerDto> getItemList();
     BannerDto selectItem(int banNo);
     void deleteItem(int banNo);

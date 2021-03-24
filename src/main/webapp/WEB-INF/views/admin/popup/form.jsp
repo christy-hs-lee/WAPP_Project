@@ -46,24 +46,18 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h6 class="card-title">Banner</h6>
-                            <form action="/admin/banner-form.do" method="post" enctype="multipart/form-data">
+                            <h6 class="card-title">Lecture</h6>
+                            <form action="/admin/popup/form.do" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="exampleInputText1">Title</label>
+                                    <label for="exampleInputText1">Type</label>
                                     <input type="text" oninput="btn_status()" class="form-control"
                                            id="exampleInputText1"
-                                           placeholder="Banner Title" name="banTitle">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputText2">Content</label>
-                                    <input type="text" oninput="btn_status()" class="form-control"
-                                           id="exampleInputText2"
-                                           placeholder="Banner Content" name="banContent">
+                                           placeholder="Popup Type" name="popType">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Image upload</label>
-                                    <input type="file" oninput="btn_status()" name="banImage" id="exampleImage1"
+                                    <input type="file" oninput="btn_status()" name="popImage" id="exampleImage1"
                                            class="file-upload-default">
                                     <div class="input-group col-xs-12">
                                         <input type="text" class="form-control file-upload-info"
@@ -97,7 +91,6 @@
 
     function btn_status() {
         if (document.getElementById("exampleInputText1").value !== '' &&
-            document.getElementById("exampleInputText2").value !== '' &&
             document.getElementById("exampleImage1").value !== '') {
             document.getElementById("sub_btn").disabled = false;
         } else {

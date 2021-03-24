@@ -1,5 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,35 +54,31 @@
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>카테고리</th>
-                                        <th>이름</th>
-                                        <th>가격</th>
+                                        <th>Type</th>
                                         <th>등록 날짜</th>
                                         <th>이미지</th>
                                         <th>Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:set var="lectureList" value="${lectureList}"/>
-                                    <c:forEach var="i" begin = "1" end = "${lectureList.size()}">
+                                    <c:set var="popupList" value="${popupList}"/>
+                                    <c:forEach var="i" begin = "1" end = "${popupList.size()}">
                                         <tr>
                                             <td>${i}</td>
-                                            <td>${lectureList[i-1].lecCategory}</td>
-                                            <td>${lectureList[i-1].lecName}</td>
-                                            <td style="text-align: right"><fmt:formatNumber value="${lectureList[i-1].lecPrice}" type="currency" currencySymbol="" />원</td>
-                                            <td><fmt:formatDate value="${lectureList[i-1].lecRegDate}" pattern="yyyy-MM-dd" /></td>
+                                            <td>${popupList[i-1].popType}</td>
+                                            <td><fmt:formatDate value="${popupList[i-1].popRegDate}" pattern="yyyy-MM-dd" /></td>
                                             <c:choose>
-                                            <c:when test="${empty lectureList[i-1].lecImg}">
+                                            <c:when test="${empty popupList[i-1].popImg}">
                                                 <td>이미지 없음</td>
                                             </c:when>
                                             <c:otherwise>
-                                                <td><button class="btn btn-primary" onclick="window.open('${lectureList[i-1].lecImg}')">이미지 보기</button></td>
+                                                <td><button class="btn btn-primary" onclick="window.open('${popupList[i-1].popImg}')">이미지 보기</button></td>
                                             </c:otherwise>
                                             </c:choose>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button class="btn btn-primary" onclick="location.href='/admin/lecture-edit.do?lecNo=${lectureList[i-1].lecNo}'">수정</button>
-                                                <button class="btn btn-secondary" onclick="if(confirm('정말 삭제하시겠습니까?')){location.href='/admin/lecture-delete.do?lecNo=${lectureList[i-1].lecNo}';} else {return false;}">삭제</button>
+                                                <button class="btn btn-primary" onclick="location.href='/admin/popup/edit.do?popNo=${popupList[i-1].popNo}'">수정</button>
+                                                <button class="btn btn-secondary" onclick="if(confirm('정말 삭제하시겠습니까?')){location.href='/admin/popup/delete.do?popNo=${popupList[i-1].popNo}';} else {return false;}">삭제</button>
                                                 </div>
                                             </td>
                                         </tr>
