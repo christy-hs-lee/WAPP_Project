@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.mapper.UserMapper">
+    <select id="getItemList" resultType="UserDto">
+        select * from user
+    </select>
+    <delete id="deleteItem">
+        delete from user where userNo=${userNo}
+    </delete>
+    <select id="selectItem" resultType="UserDto">
+        select * from user where userNo=${userNo}
+    </select>
+    <insert id="addItem" >
+        INSERT INTO user(userName, userEmail, userPassword, userRegDate)
+                VALUES(#{userDto.userName}, #{userDto.userEmail}, #{userDto.userPassword}, now())
+    </insert>
+    <update id="editItem">
+        update user set userName=#{userDto.userName}, userEmail=#{userDto.userEmail}, userPassword=#{userDto.userPassword} where userNo=#{userDto.userNo}
+    </update>
+</mapper>

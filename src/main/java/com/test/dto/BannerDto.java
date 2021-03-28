@@ -13,7 +13,7 @@ public class BannerDto {
     private int banNo;
     private String banImg;
     private int banCount;
-    private Date banRegDate; // date로 바꿀까?
+    private Date banRegDate;
     private String banTitle;
     private String banContent;
 

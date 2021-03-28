@@ -60,7 +60,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/admin/logout">
                     <i class="link-icon" data-feather="log-out"></i>
                     <span class="link-title">로그아웃</span>
                 </a>

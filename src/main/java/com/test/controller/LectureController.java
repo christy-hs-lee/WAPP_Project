@@ -28,15 +28,6 @@ public class LectureController {
     FirebaseMessagingSnippets firebaseMessagingSnippets;
 
 
-    @GetMapping("/admin/home") // 어드민 홈
-    public String adminHome(Model model){
-        try{
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return "admin/home";
-    }
 
     @GetMapping("/admin/lecture/data-table.do") // 어드민 강의 데이터 보여주기
     public String dataTable(Model model){

@@ -12,5 +12,6 @@
         <typeAlias alias="BannerDto" type="com.test.dto.BannerDto"/>
         <typeAlias alias="LectureDto" type="com.test.dto.LectureDto"/>
         <typeAlias alias="PopupDto" type="com.test.dto.PopupDto"/>
+        <typeAlias alias="UserDto" type="com.test.dto.UserDto"/>
     </typeAliases>
 </configuration>

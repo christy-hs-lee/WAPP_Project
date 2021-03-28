@@ -259,48 +259,7 @@
                                         <td><span class="badge badge-success">Review</span></td>
                                         <td>Carl Henson</td>
                                     </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>NobleUI ReactJs</td>
-                                        <td>01/05/2020</td>
-                                        <td>10/09/2020</td>
-                                        <td><span class="badge badge-info-muted">Pending</span></td>
-                                        <td>Jensen Combs</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>NobleUI VueJs</td>
-                                        <td>01/01/2020</td>
-                                        <td>31/11/2020</td>
-                                        <td><span class="badge badge-warning">Work in Progress</span>
-                                        </td>
-                                        <td>Amiah Burton</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>NobleUI Laravel</td>
-                                        <td>01/01/2020</td>
-                                        <td>31/12/2020</td>
-                                        <td><span class="badge badge-danger-muted text-white">Coming soon</span></td>
-                                        <td>Yaretzi Mayo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>NobleUI NodeJs</td>
-                                        <td>01/01/2020</td>
-                                        <td>31/12/2020</td>
-                                        <td><span class="badge badge-primary">Coming soon</span></td>
-                                        <td>Carl Henson</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border-bottom">3</td>
-                                        <td class="border-bottom">NobleUI EmberJs</td>
-                                        <td class="border-bottom">01/05/2020</td>
-                                        <td class="border-bottom">10/11/2020</td>
-                                        <td class="border-bottom"><span class="badge badge-info-muted">Pending</span>
-                                        </td>
-                                        <td class="border-bottom">Jensen Combs</td>
-                                    </tr>
+
                                     </tbody>
                                 </table>
                             </div>
