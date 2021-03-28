@@ -16,6 +16,7 @@
         </div>
         <div>
             <button type="submit">로그인</button>
+            <button type="button" onclick="location.href='/signIn'">회원가입</button>
         </div>
     </form>
 
