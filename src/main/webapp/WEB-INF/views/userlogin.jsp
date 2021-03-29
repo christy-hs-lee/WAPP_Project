@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
@@ -15,8 +16,15 @@
             <input type="password" placeholder="********" id="password" name="userPassword">
         </div>
         <div>
-            <button type="submit">로그인</button>
-            <button type="button" onclick="location.href='/signIn'">회원가입</button>
+            <div>
+                <button type="submit">로그인</button>
+            </div>
+            <div class="kakao-login">
+                <button type="button" class="kakao-login-btn" onclick="location.href='${kakaoUrl}'"></button>
+            </div>
+            <div>
+                <button type="button" onclick="location.href='/signIn'">회원가입</button>
+            </div>
         </div>
     </form>
 

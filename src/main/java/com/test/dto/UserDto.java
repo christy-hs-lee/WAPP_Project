@@ -16,6 +16,10 @@ public class UserDto {
     private String userPassword;
     private Date userRegDate;
 
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
     public int getUserNo() {
         return userNo;
     }

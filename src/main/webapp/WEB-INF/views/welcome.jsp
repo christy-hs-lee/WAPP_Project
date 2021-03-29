@@ -13,6 +13,5 @@
 <body>
     <h1>환영합니다 ${userName}님, 회원가입이 정상적으로 완료되었습니다.</h1>
     <a href="/">홈으로 이동</a>
-    <a href="/login">로그인하기</a>
 </body>
 </html>
