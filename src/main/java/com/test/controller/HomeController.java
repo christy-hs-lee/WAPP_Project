@@ -2,8 +2,10 @@ package com.test.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.test.dto.LectureDto;
 import com.test.dto.OAuthTokenDto;
 import com.test.dto.UserDto;
+import com.test.service.test.LectureService;
 import com.test.service.test.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -33,9 +35,14 @@ public class HomeController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LectureService lectureService;
+
     @GetMapping("/") // 홈
     public String main(Model model){
         try{
+            ArrayList<LectureDto> lectureList = lectureService.getItemList();
+            model.addAttribute("lectureList", lectureList);
 
         }catch (Exception e){
             e.printStackTrace();
